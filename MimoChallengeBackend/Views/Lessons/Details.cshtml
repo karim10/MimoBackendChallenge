@@ -1,0 +1,10 @@
+﻿@model MimoChallengeBackend.Models.Lesson
+
+@{
+    ViewBag.Title = "Details";
+}
+<h1>@Html.DisplayFor(model => model.Chapter.Course.Title)</h1>
+<h2>@Html.DisplayFor(model => model.Chapter.Title)</h2>
+<h3>@Html.DisplayFor(model => model.Title)</h3>
+<h4>You look like a genius. Just press the Button :D </h4>
+<input type="button" class="btn btn-info" value="Complete Lesson" onclick="location.href='@Url.Action("LessonAchieved", "Lessons",  new { id = Model.ID })'" />

@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MimoChallengeBackend.Models.Course>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+
+            <ul>
+                @foreach (var chapter in item.Chapters)
+                {
+                    <li>
+                        @Html.ActionLink(@Html.DisplayFor(m => chapter.Title).ToHtmlString(), "Index", "Lessons", new { id = chapter.ID }, null)
+                        @if (chapter.achieved)
+                    { <p style="color:green;">achieved</p>}
+                    else
+                    { <p style="color:red;">not achieved</p>}
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+    }
+</div>
+
+<h3>Achievements</h3>
+<table class="table">
+    <tr>
+        <td>Complete 5 lessons</td>
+        <td>
+            @if (@ViewBag.lesson_achieved >= 5)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved (@ViewBag.lesson_achieved lesson achieved)</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete 25 lessons</td>
+        <td>
+            @if (@ViewBag.lesson_achieved >= 25)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved (@ViewBag.lesson_achieved lesson achieved)</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete 50 lessons</td>
+        <td>
+            @if (@ViewBag.lesson_achieved >= 50)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved (@ViewBag.lesson_achieved lesson achieved)</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete 1 Chapter</td>
+        <td>
+            @if (@ViewBag.chapter_achived >= 1)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved (@ViewBag.chapter_achieved chapter achieved)</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete 5 Chapter</td>
+        <td>
+            @if (@ViewBag.chapter_achived >= 5)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved (@ViewBag.chapter_achieved chapter achieved)</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete C# course</td>
+        <td>
+            @if (@ViewBag.C_achieved)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete Javascript course</td>
+        <td>
+            @if (@ViewBag.Javascript_achieved)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved</p>}
+        </td>
+    </tr>
+    <tr>
+        <td>Complete Swift course</td>
+        <td>
+            @if (@ViewBag.Swift_achieved)
+            { <p style="color:green;">achieved</p>}
+            else
+            { <p style="color:red;">not achieved</p>}
+        </td>
+    </tr>
+
+</table>

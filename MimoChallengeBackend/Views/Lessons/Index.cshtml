@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MimoChallengeBackend.Models.Lesson>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>@ViewBag.Course</h1>
+<h2>@ViewBag.Chapter</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Details", "Lessons", new { id = item.ID }, null)
+            </td>
+            <td>
+                @if (item.achieved)
+                {
+                    <p style="color:green;">achieved</p>
+                }
+                else
+                {
+                    <p style="color:red;">not achieved</p>
+                }
+            </td>
+
+            @foreach (var ach in ViewBag.Achievements
+                as List<MimoChallengeBackend.Models.Achievement>)
+            {
+                if (ach.LessonID == item.ID)
+                {
+                    <td> @ach.StartTime </td>
+                    <td> @ach.EndTime</td>
+                }
+            }
+        </tr>
+    }
+</table>
+<input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Courses")'" />
